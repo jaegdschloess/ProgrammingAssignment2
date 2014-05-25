@@ -4,7 +4,7 @@
 ## a cached matrix inverse.
 
 ## Example usage
-##     x = matrix(c(1:2,2:1),2,2)  
+##     x = matrix(c(1:2,2:1),2,2)
 ##    cm = makeCacheMatrix(x)
 ##    cacheSolve(cm)
 
@@ -13,34 +13,34 @@
 ## and return a list of child functions which are aware 
 ## of parent environment and so can utilize the cached inverse
 makeCacheMatrix <- function(x = matrix()) {
-	
-	# Cached value of matrix inverse 
-	matrixInverse <- NULL
+    
+    # Cached value of matrix inverse 
+    matrixInverse <- NULL
      
      # Gets the stored matrix
      get <- function() x
 
-	# Set/Reset the matrix and clear any
-	# caching of its inverse
-	set <- function(y) {
-		x <<- y
-		matrixInverse <<- NULL
-	}
+    # Set/Reset the matrix and clear any
+    # caching of its inverse
+    set <- function(y) {
+        x <<- y
+        matrixInverse <<- NULL
+    }
 
-	# Store matrix inverse for re-use 
-	setinverse <- function(inverse) {
-	     matrixInverse <<- inverse
-	}
+    # Store matrix inverse for re-use 
+    setinverse <- function(inverse) {
+         matrixInverse <<- inverse
+    }
 
      # Gets the stored matrix inverse, will be NULL
      # if not previously cached.
-	getinverse <- function() matrixInverse
+    getinverse <- function() matrixInverse
      
      # Return a list of functions which have access to
      # parent environment's cached value.
      list(set = set, get = get, setinverse = setinverse, 
           getinverse = getinverse)
-	
+    
 }
 
 
